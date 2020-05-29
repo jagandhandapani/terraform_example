@@ -46,7 +46,7 @@ resource "azurerm_public_ip" "webserver_public_ip" {
     allocation_method    = "Dynamic"
 }
 
-resource "azurerm_windows_virtual_machine" "windows_vm"{
+resource "azurerm_virtual_machine" "windows_vm"{
     count                        = 2
     name                         = "VM-${format("%02d",count.index+1)}"
     location                     = var.location
