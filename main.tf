@@ -46,25 +46,5 @@ resource "azurerm_public_ip" "webserver_public_ip" {
     allocation_method    = "Dynamic"
 }
 
-resource "azurerm_virtual_machine" "windows_vm"{
-    count                        = 2
-    name                         = "VM-${format("%02d",count.index+1)}"
-    location                     = var.location
-    resource_group_name          = azurerm_resource_group.rgroup.name
-    network_interface_ids        = [element(azurerm_network_interface.networkinterface.*.id, count.index)]
-    size                         = "Standard_B1s"
-    admin_username               = "jaganazure"
-    admin_password               = "Security@321"
 
-    os_disk {
-        caching     = "ReadWrite"
-        storage_account_type = "Standard_LRS"
-    }
-    source_image_reference {
-        publisher       = "MicrosoftWindowsServer"
-        offer           = "WindowsServerSemiAnnual"
-        sku             = "Datacenter-Core-1709-smalldisk"
-        version         = "latest"
-    }
-}
 
